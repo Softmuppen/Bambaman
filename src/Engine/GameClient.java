@@ -38,6 +38,7 @@ public class GameClient implements Runnable{
 	public synchronized void run(){
 		while(true){	
 			updateServer();
+			Log.debug("[CLIENT][RUN] " + player.getName());
 			Log.debug("[CLIENT][RUN] Connection status to: " + client.getRemoteAddressTCP() + " is " + client.isConnected());
 			try {Thread.sleep(200);} catch (InterruptedException e) {e.printStackTrace();}
 		}
@@ -69,6 +70,8 @@ public class GameClient implements Runnable{
 					if(receivedPacket.message.equals("join_request_approved")){
 						player = receivedPacket.clientPlayer;
 						Log.debug("[CLIENT] Join request approved by server");
+						Log.debug("[CLIENT] Client recieved player by server: " + receivedPacket.clientPlayer.toString());
+						Log.debug("[CLIENT] Client set up a new player: " + player.toString());
 					}
 					// Receive updated player list
 					if(receivedPacket.message.equals("update")){
