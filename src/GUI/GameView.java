@@ -43,7 +43,7 @@ public class GameView extends JFrame implements Observer, Runnable, Serializable
 	private GamePanel gamePanel;
 	private HelpPanel helpPanel;
 	private InformationPanel informationPanel;	
-	private AudioHandler audio;
+	//private AudioHandler audio;
 	private boolean running;
 	
 	// constants:
@@ -60,7 +60,7 @@ public class GameView extends JFrame implements Observer, Runnable, Serializable
 	 */
 	public GameView(GameClient gameClient){
 		this.gameClient = gameClient;		
-		audio = new AudioHandler();		
+		//audio = new AudioHandler();		
 		running = true;
 		
 		// Create the layered panel and add each panel
@@ -182,10 +182,11 @@ public class GameView extends JFrame implements Observer, Runnable, Serializable
 			// Here goes the things that should be updated constantly...
 			gamePanel.repaint();
 			
+			/*
 			if(!audio.isPlaying()){
 				audio.setPlaying(true);
 				audio.startPlaying(BACKGROUND_MUSIC);
-			}
+			}*/
 			
 			try {Thread.sleep(10);} catch (InterruptedException e) {e.printStackTrace();}
 		}	
@@ -197,8 +198,8 @@ public class GameView extends JFrame implements Observer, Runnable, Serializable
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		if( ((String) arg).contains("audio/") ){
+		/*if( ((String) arg).contains("audio/") ){
 			audio.startPlaying((String) arg);
-		}
+		}*/
 	}
 }

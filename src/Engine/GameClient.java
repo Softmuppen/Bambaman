@@ -40,7 +40,7 @@ public class GameClient implements Runnable{
 		while(true){	
 			updateServer();
 			Log.debug("[CLIENT][RUN] Connection status to: " + client.getRemoteAddressTCP() + " is " + client.isConnected());
-			try {Thread.sleep(10);} catch (InterruptedException e) {e.printStackTrace();}
+			try {Thread.sleep(50);} catch (InterruptedException e) {e.printStackTrace();}
 		}
 	}
 	
@@ -108,6 +108,8 @@ public class GameClient implements Runnable{
 		ClientPacket joinRequest = new ClientPacket();
 		ClientPacket.message = "join_request";
 		ClientPacket.player = player;
+		
+		
 		client.sendTCP(joinRequest);
 		Log.debug("[CLIENT] Sending join_request... ");
 	}

@@ -1,8 +1,6 @@
 package Main;
 
-import java.io.IOException;
 import java.net.InetAddress;
-import java.net.Socket;
 import java.net.UnknownHostException;
 
 import Engine.GameClient;
@@ -81,24 +79,5 @@ public class Main {
 		
 	}
 	
-	/**
-	 * When the Player has loaded a current state of the game old
-	 * threads stop and new ones are created. Loads the new state.
-	 */
-	@SuppressWarnings("deprecation")
-	public static void restart(){
-		if(inGame){
-			engineThread.stop();
-			viewThread.stop();
-			gameView.dispose();
-		}
-	
-		gameView = new GameView(gameClient);
-		
-		engineThread = new Thread(gameClient);
-		viewThread = new Thread(gameView);
-		
-		engineThread.start();
-		viewThread.start();
-	}
+
 }

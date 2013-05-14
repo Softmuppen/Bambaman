@@ -81,21 +81,23 @@ public class ServerEngine implements Runnable, Serializable{
 
 				if (object instanceof ClientPacket) {
 					
-					if( ClientPacket.message.equals(null)){
+					ClientPacket cp = (ClientPacket) object;
+					
+					if( cp.message.equals(null)){
 						Log.error("[SERVER] ClientPacket contained a null message");
 					}else{
-						Log.debug("[SERVER] Server recieved a ClientPacket: " + ClientPacket.message + ", from: " + connection.getRemoteAddressTCP());
+						Log.debug("[SERVER] Server recieved a ClientPacket: " + cp.message + ", from: " + connection.getRemoteAddressTCP());
 					
-						if( ClientPacket.message.equals("join_request")){
+						if( cp.message.equals("join_request")){
 							ServerPacket joinResponse = new ServerPacket();
 							ServerPacket.message = "join_request_approved";
-							PlayerCharacter createdPlayer = createPlayer(ClientPacket.player.getName());
+							PlayerCharacter createdPlayer = createPlayer(cp.player.getName());
 							ServerPacket.message = "join_request_approved";
 							ServerPacket.clientPlayer = createdPlayer;
 							connection.sendTCP(joinResponse);
-							Log.debug("[SERVER] A player joined the server: " + ClientPacket.player.getName());
-						}else if( ClientPacket.message.equals("client_player_update")){
-							PlayerCharacter player = ClientPacket.player;
+							Log.debug("[SERVER] A player joined the server: " + cp.player.getName());
+						}else if( cp.message.equals("client_player_update")){
+							PlayerCharacter player = cp.player;
 							updatePlayer(player);
 						}
 					}
@@ -134,7 +136,7 @@ public class ServerEngine implements Runnable, Serializable{
 			}else{
 				Log.trace("[SERVER] No players..");
 			}
-			try {Thread.sleep(10);} catch (InterruptedException e) {e.printStackTrace();}
+			try {Thread.sleep(50);} catch (InterruptedException e) {e.printStackTrace();}
 		}
 	}
 
