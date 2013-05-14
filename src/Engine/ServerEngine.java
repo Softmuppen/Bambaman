@@ -128,7 +128,7 @@ public class ServerEngine implements Runnable, Serializable{
 			}else{
 				Log.trace("[SERVER] No players..");
 			}
-			try {Thread.sleep(50);} catch (InterruptedException e) {e.printStackTrace();}
+			try {Thread.sleep(200);} catch (InterruptedException e) {e.printStackTrace();}
 		}
 	}
 

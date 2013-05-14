@@ -15,6 +15,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import com.esotericsoftware.minlog.Log;
+
 import World.Map;
 
 import Engine.GameClient;
@@ -148,6 +150,7 @@ public class GameView extends JFrame implements Observer, Runnable{
 		
 		// add observer to player
 		
+		Log.debug(gameClient.getClientPlayer().getName());
 		gameClient.getClientPlayer().addObserver(this);
 		gameClient.getClientPlayer().addObserver(informationPanel);
 		

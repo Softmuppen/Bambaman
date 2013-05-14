@@ -35,6 +35,11 @@ public class DoorTile extends Tile{
 		this.active = true;
 	}
 	
+	public DoorTile()
+	{
+		;
+	}
+	
 	/**
 	 * Returns the map this "door" is connected to
 	 * @return toMap The map its connected to

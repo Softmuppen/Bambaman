@@ -39,7 +39,7 @@ public class GameClient implements Runnable{
 		while(true){	
 			updateServer();
 			Log.debug("[CLIENT][RUN] Connection status to: " + client.getRemoteAddressTCP() + " is " + client.isConnected());
-			try {Thread.sleep(50);} catch (InterruptedException e) {e.printStackTrace();}
+			try {Thread.sleep(200);} catch (InterruptedException e) {e.printStackTrace();}
 		}
 	}
 	
