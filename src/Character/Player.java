@@ -116,7 +116,7 @@ public class Player extends Entity {
 			   return(true);
 		   }*/
 
-		if( this.getName() == ((Player)obj).getName()){
+		if( this.getName().equals(((Player)obj).getName())){
 			return true;
 		}
 
