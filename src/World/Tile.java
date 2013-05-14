@@ -24,4 +24,9 @@ public class Tile extends Entity{
 	{
 		super(id, x, y, width, height);
 	}	
+	
+	public Tile()
+	{
+		;
+	}
 }

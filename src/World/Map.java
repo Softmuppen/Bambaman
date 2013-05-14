@@ -206,7 +206,7 @@ public class Map implements Serializable{
 				
 				if(Integer.parseInt(line) != 0)
 				{
-					blockTiles.add(new BlockTile(Integer.parseInt(line), x, y , width, height, false));
+					//blockTiles.add(new BlockTile(Integer.parseInt(line), x, y , width, height, false));
 				}
 				x += width;
 			}

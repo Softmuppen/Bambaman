@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import Character.Player;
 import World.Map;
-import World.World;
 
 public class ServerPacket {
 	public String message;

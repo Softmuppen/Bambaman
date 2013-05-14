@@ -44,7 +44,7 @@ public class GameClient implements Runnable{
 	}
 	
 	public synchronized void initClient(String localAddress){
-		client = new Client(16384,4096);
+		client = new Client(32768,32768);
 		Network.register(client);
 		
 		client.addListener(new Listener() {

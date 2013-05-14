@@ -56,7 +56,7 @@ public class ServerEngine implements Runnable, Serializable{
 	}
 
 	public synchronized void initServer(){
-		server = new Server(32768,8192);
+		server = new Server(32768,32768);
 		Network.register(server);
 
 		server.addListener(new Listener() {

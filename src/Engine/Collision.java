@@ -2,12 +2,10 @@ package Engine;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
-import java.awt.geom.Ellipse2D;
 import java.io.Serializable;
 
 import Character.Player;
 import World.Tile;
-import Item.Item;
 
 /**
  * This handles all sort of collision in the game, Character->Tile, Character->Character and more
@@ -23,7 +21,7 @@ public class Collision implements Serializable{
 	private static final long serialVersionUID = 8L;
 	private ArrayList<Player> players;
 	private ArrayList<Tile> blockTiles;
-	private ArrayList<Item> items;
+	
 
 	/**
 	 * Constructor
@@ -48,11 +46,7 @@ public class Collision implements Serializable{
 	 */
 	public void setCurrentPlayerCharacters(ArrayList<Player> players){this.players = players;}
 
-	/**
-	 * Updates active items
-	 * @param items
-	 */
-	public void setCurrentItems(ArrayList<Item> items){this.items = items;}	
+	
 
 	/**
 	 * Checks for new collisions, updates constantly

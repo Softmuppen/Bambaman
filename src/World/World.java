@@ -31,6 +31,11 @@ public class World implements Serializable{
 		loadWorld(id);
 	}
 	
+	public World()
+	{
+		;
+	}
+	
 	/**
 	 * Return the map id
 	 * @return id The MapID
