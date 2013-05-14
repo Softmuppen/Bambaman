@@ -14,6 +14,5 @@ public class Server
 		Thread serverEngineThread = new Thread(serverEngine);
 		Log.debug("[MAIN][THREAD] Starting serverEngineThread...");
 		serverEngineThread.start();
-
 	}
 }
