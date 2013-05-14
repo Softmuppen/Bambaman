@@ -31,21 +31,20 @@ public class KeyboardController extends KeyAdapter  implements Serializable{
 	 * @param key The key you have pressed
 	 */
 	public void keyPressed(KeyEvent key){
-/*
 		switch (key.getKeyCode()){
 		case KeyEvent.VK_UP:
-			player.moveY(-1);
+			player.setDy(-1);
 			break;
 		case KeyEvent.VK_LEFT:
-			player.moveX(-1);
+			player.setDx(-1);
 			break;
 		case KeyEvent.VK_RIGHT:
-			player.moveX(1);
+			player.setDx(1);
 			break;
 		case KeyEvent.VK_DOWN:
-			player.moveY(1);
+			player.setDy(1);
 			break;
-		}*/
+		}
 	}
 
 	/**

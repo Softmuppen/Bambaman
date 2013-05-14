@@ -38,7 +38,6 @@ public class Player extends Entity {
 		setY(getY()+getDy());
 		setX(getX()+getDx());
 
-
 		// Set the current direction
 		if(getDx() > 0){
 			setDirection("right");

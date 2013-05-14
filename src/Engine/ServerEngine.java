@@ -168,7 +168,6 @@ public class ServerEngine implements Runnable, Serializable{
 			sendPacket.world = world.getCurrentMap();
 			Log.debug("[SERVER][UPDATECLIENTS] sendPacket contains:  MSG = " + sendPacket.message + ", Players = " + sendPacket.players + ", World = " + world.getID());
 			server.sendToAllTCP(sendPacket);
-
 		}else{
 			Log.debug("[SERVER][UPDATECLIENTS] No connections to the server...");
 		}
