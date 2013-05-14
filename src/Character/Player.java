@@ -20,6 +20,7 @@ public class Player extends Entity {
 	public Player(String name, int width, int height)
 	{
 		super(0, 50, 50, width, height);  
+		this.name = name;
 		health = 100;
 		direction = "right";
 		dx = dy = 0;
