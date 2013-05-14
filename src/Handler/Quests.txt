@@ -1,0 +1,18 @@
+[KILLINGQUEST]
+1 John 1 500
+Now that you have collected a sword i can let you out in the world. But beware, there are many great foes ahead of you on your way to John, still wanna do this?
+2 Chicken 3 50
+The damn chickens are everywhere!! I caught some of them in my basement, but I don't have the heart to kill them. Can you help me?
+3 BlueGuard 3 100
+The BlueGuards have been raiding the city all morning. You better prepare for battle! There's an armory west of here, where you can buy armor and weapons. Are you ready for battle?
+[ITEMQUEST]
+0 WoodenStick 1 0
+Hey! I can see that you are stuck in here. If you promise to help me kill the monster John, i can help you get out of here. But first you need to get yourself a weapon.
+4 Pickaxe 1 25
+Puuh, that was close. We need to stop these invasions by going down the mine north west of here and killing their leader. If only you had a pickaxe.. If you go south, I bet you can find one.
+5 Armor 100 25
+Great! Now you can smash those rocks north west of here and enter the dungeon. But be aware, I've heard rumours that John dwells deep down the cave. Do you still want to go down?
+6 Pickaxe 1 25
+Greetings! I've heard you're looking for a pickaxe. You can have mine if you can find it. I dropped it in this dungeon, while fleeing from some creatures.. Do you wanna enter?
+7 SuperArmor 100 25
+Thanks to you, the world is now safe! I've no further quests to offer you. However you can still continue playing if you want to. Do you want to finish the game?
