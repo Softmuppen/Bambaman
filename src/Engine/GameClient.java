@@ -2,6 +2,7 @@ package Engine;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import com.esotericsoftware.kryonet.*;
 import com.esotericsoftware.minlog.Log;
@@ -76,27 +77,28 @@ public class GameClient implements Runnable{
 					// Receive updated player list
 					if(receivedPacket.message.equals("update")){
 						Log.debug("[CLIENT] Update packet received");
-						player = receivedPacket.clientPlayer;
+						//player = receivedPacket.clientPlayer;
 						players = receivedPacket.players;
 						world.setCurrentMap(receivedPacket.world);
 						
 						
-						/*Iterator<PlayerCharacter> it = players.iterator();
+						Iterator<Player> it = players.iterator();
 						while(it.hasNext()){
-							PlayerCharacter listPlayer = it.next();
+							Player listPlayer = it.next();
 							if(listPlayer.equals(player)){
 								player = listPlayer;
 								it.remove();
 								Log.debug("[CLIENT] " + listPlayer.getName() + " removed.");
+								break;
 							}
 						}
 						
 						Log.debug("[CLIENT] Playerlist: ");
-						for( PlayerCharacter p : players){
+						for( Player p : players){
 							Log.debug("  -" + p.getName());
 						}
 						Log.debug("[CLIENT] CLientPlayer name :" + player.getName());
-						*/
+						
 					}
 				}//-------------------------------------------------------
 			}
