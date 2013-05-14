@@ -5,10 +5,8 @@ import java.util.ArrayList;
 import java.awt.geom.Ellipse2D;
 import java.io.Serializable;
 
-import Character.PlayerCharacter;
+import Character.Player;
 import World.Tile;
-import Character.EnemyCharacter;
-import Character.Character;
 import Item.Item;
 
 /**
@@ -23,7 +21,7 @@ public class Collision implements Serializable{
 
 	// fields:
 	private static final long serialVersionUID = 8L;
-	private ArrayList<PlayerCharacter> players;
+	private ArrayList<Player> players;
 	private ArrayList<Tile> blockTiles;
 	private ArrayList<Item> items;
 
@@ -33,7 +31,7 @@ public class Collision implements Serializable{
 	 * @param blockTiles
 	 * @param characters
 	 */
-	public Collision(ArrayList<PlayerCharacter> players, ArrayList<Tile> blockTiles){
+	public Collision(ArrayList<Player> players, ArrayList<Tile> blockTiles){
 		this.players = players;
 		this.blockTiles = blockTiles;
 	}
@@ -48,7 +46,7 @@ public class Collision implements Serializable{
 	 * Updates active characters
 	 * @param characters
 	 */
-	public void setCurrentPlayerCharacters(ArrayList<PlayerCharacter> players){this.players = players;}
+	public void setCurrentPlayerCharacters(ArrayList<Player> players){this.players = players;}
 
 	/**
 	 * Updates active items
@@ -84,7 +82,7 @@ public class Collision implements Serializable{
 	 * Checks for Player to BlockTile collision
 	 */
 	public void checkPlayerTileCollision(){
-		for(PlayerCharacter player : players){
+		for(Player player : players){
 			player.setY(player.getY()-player.getDy());		// move from collision
 			player.setX(player.getX()-player.getDx());		// move from collision
 
@@ -109,8 +107,8 @@ public class Collision implements Serializable{
 	 * Uses a overridden equals() in Character.
 	 */
 	public void checkPlayerPlayerCollision(){
-		for(PlayerCharacter p1 : players){
-			for(PlayerCharacter p2 : players){
+		for(Player p1 : players){
+			for(Player p2 : players){
 				if( !p1.equals(p2) ){
 					if(p1.getBounds().intersects(p2.getBounds())){
 						moveBack(p1);
@@ -126,7 +124,7 @@ public class Collision implements Serializable{
 	 * shouldn't be updated constantly.
 	 * @param character
 	 */
-	public void checkSingleCharacterTileCollision(PlayerCharacter players){
+	public void checkSingleCharacterTileCollision(Player players){
 		for(Tile blockTile : blockTiles){
 			Rectangle block = blockTile.getBounds();
 			if(players.getBounds().intersects(block)){
@@ -142,7 +140,7 @@ public class Collision implements Serializable{
 	public void checkPlayerCharacterTileCollision(){
 		for(Tile blockTile : blockTiles){
 			Rectangle block = blockTile.getBounds();
-			for(PlayerCharacter p : players){
+			for(Player p : players){
 				if(p.getBounds().intersects(block)){
 					moveBack(p);
 				}
@@ -153,8 +151,9 @@ public class Collision implements Serializable{
 	/**
 	 * Checks if a Player is colliding with a Item
 	 */
+	/*
 	public void checkItemCollision(){
-		for(PlayerCharacter player : players){
+		for(Player player : players){
 			for(Item item : items){
 				if(item.getBounds().intersects(player.getBounds()) ){
 					// Play a pickup sound
@@ -163,7 +162,7 @@ public class Collision implements Serializable{
 				}
 			}
 		}
-	}
+	}*/
 
 	/**
 	 * Pushes a character a certain amount of pixels in a certain direction
@@ -172,7 +171,7 @@ public class Collision implements Serializable{
 	 * @param target
 	 * @param pixels
 	 */
-	public void pushCharacter(Character pusher, Character target, int pixels){
+	/*public void pushCharacter(Character pusher, Character target, int pixels){
 		
 		String pushDirection = pusher.getDirection();
 		
@@ -226,13 +225,13 @@ public class Collision implements Serializable{
 			}
 			target.setDirection(beforeDirection);
 		}
-	}
+	}*/
 
 	/**
 	 * Moves the character one pixel back from the way he is moving
 	 * @param character
 	 */
-	public void moveBack(Character character){
+	public void moveBack(Player character){
 		if(character.getDy() < 0){
 			character.setY(character.getY()+1);
 		}

@@ -27,12 +27,12 @@ public class StartScreen extends JFrame{
 
 	// fields:
 	private StartPanel startPanel;
-	private JFileChooser dialog;
 	
 	// constants:
 	private static final String GAME_TITLE = "SELDA";	
 	private static final int SCREEN_WIDTH = 800;
 	private static final int SCREEN_HEIGHT = 640;
+	private JFileChooser dialog;
 
 	/**
 	 * Constructor

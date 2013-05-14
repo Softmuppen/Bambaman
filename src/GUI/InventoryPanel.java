@@ -16,7 +16,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-import Character.PlayerCharacter;
+import Character.Player;
 import Item.ArmorItem;
 import Item.Item;
 import Item.LifeItem;
@@ -37,7 +37,7 @@ public class InventoryPanel extends JPanel implements Observer{
 	private ArrayList<ItemIcon> slots;
 	private ItemIcon weaponSlot;
 	private ItemIcon armorSlot;
-	private PlayerCharacter player;
+	private Player player;
 	
 	// consants:
 	private static final String PANEL_BACKGROUND = "images/gui/inventory.png";
@@ -46,7 +46,7 @@ public class InventoryPanel extends JPanel implements Observer{
 	 * Constructor
 	 * @param player The player character
 	 */
-	public InventoryPanel(PlayerCharacter player){
+	public InventoryPanel(Player player){
 		this.player = player;
 		slots = new ArrayList<ItemIcon>();
 		
@@ -92,6 +92,7 @@ public class InventoryPanel extends JPanel implements Observer{
 		slotPanel.setPreferredSize(new Dimension(180, 420));
 		
 		// create slots
+		/*
 		for(int i=0; i<player.getMaxInventorySize(); i++){
 			ItemIcon itemIcon = new ItemIcon();
 
@@ -112,7 +113,7 @@ public class InventoryPanel extends JPanel implements Observer{
 
 			slotPanel.add(itemIcon);
 			slots.add(itemIcon);
-		}
+		}*/
 
 		topPanel.add(slotPanel, BorderLayout.SOUTH);
 		add(topPanel);
@@ -135,6 +136,7 @@ public class InventoryPanel extends JPanel implements Observer{
 		equippedPanel.setPreferredSize(new Dimension(180, 100));
 		
 		// create weapon slot
+		/*
 		ItemIcon weaponIcon = new ItemIcon();
 		weaponIcon.addMouseListener(new MouseAdapter(){
 			public void mousePressed(MouseEvent e){
@@ -159,7 +161,7 @@ public class InventoryPanel extends JPanel implements Observer{
 			}
 		});		
 		equippedPanel.add(armorIcon);
-		armorSlot = armorIcon;
+		armorSlot = armorIcon;*/
 		
 		bottomPanel.add(equippedPanel);
 		add(bottomPanel);
@@ -170,6 +172,7 @@ public class InventoryPanel extends JPanel implements Observer{
 	 * @param player
 	 * @param items
 	 */
+	/*
 	private void updateInventory(){
 		// update panels
 		updateSlots();
@@ -177,11 +180,12 @@ public class InventoryPanel extends JPanel implements Observer{
 		
 		slotPanel.revalidate();
 		equippedPanel.revalidate();
-	}
+	}*/
 	
 	/**
 	 * Updates the inventory slots
 	 */
+	/*
 	private void updateSlots(){
 		
 		for(int i=0; i<slots.size(); i++){
@@ -194,11 +198,12 @@ public class InventoryPanel extends JPanel implements Observer{
 				icon.setItem(item);
 			}
 		}
-	}
+	}*/
 	
 	/**
 	 * Updates the equip slots
 	 */
+	/*
 	private void updateEquip(){
 		if(player.getWeapon() != null){
 			weaponSlot.setItem(player.getWeapon());
@@ -212,22 +217,22 @@ public class InventoryPanel extends JPanel implements Observer{
 			armorSlot.setItem(null);
 		}
 	}
-	
+	/*
 	/**
 	 * Reset the inventory when game loads etc...
 	 * @param player The player character
 	 */
-	public void reset(PlayerCharacter player){
+	/*public void reset(Player player){
 		updateInventory();
 	}
 	
 	/**
 	 * When somthing has changed in the inventory, update is called
 	 */
-	@Override
+	
 	public void update(Observable o, Object arg) {
-		if(o instanceof PlayerCharacter && arg instanceof ArrayList<?>){	
-			updateInventory();
+		if(o instanceof Player && arg instanceof ArrayList<?>){	
+			//updateInventory();
 		}	
 	}
 }

@@ -1,32 +1,24 @@
 package Engine;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.*;
 
-import Character.PlayerCharacter;
-import Character.Character;
+import Character.Player;
 import World.World;
 import Engine.Collision;
-import Main.Main;
 
+import Networking.ClientPacket;
 import Networking.Network;
-import Networking.Network.ClientPacket;
-import Networking.Network.ServerPacket;
+import Networking.ServerPacket;
 //import Networking.ClientPacket;
 //import Networking.ServerPacket;
 
 import com.esotericsoftware.kryonet.*;
-import com.esotericsoftware.kryo.*;
 import com.esotericsoftware.minlog.Log;
 
-import org.objectweb.*;
 
 /**
  * GameEngine
@@ -39,7 +31,7 @@ public class ServerEngine implements Runnable, Serializable{
 	// fields:
 	private static final long serialVersionUID = 12L;
 	private World world;
-	private ArrayList<PlayerCharacter> players;
+	private ArrayList<Player> players;
 	private Collision collision;	
 
 	// constants:
@@ -56,7 +48,7 @@ public class ServerEngine implements Runnable, Serializable{
 	public ServerEngine(){
 
 		world = new World(1);
-		players = new ArrayList<PlayerCharacter>();
+		players = new ArrayList<Player>();
 		collision = new Collision(players, world.getCurrentMap().getBlockTiles());
 
 		initServer();
@@ -90,14 +82,14 @@ public class ServerEngine implements Runnable, Serializable{
 					
 						if( cp.message.equals("join_request")){
 							ServerPacket joinResponse = new ServerPacket();
-							ServerPacket.message = "join_request_approved";
-							PlayerCharacter createdPlayer = createPlayer(cp.player.getName());
-							ServerPacket.message = "join_request_approved";
-							ServerPacket.clientPlayer = createdPlayer;
+							joinResponse.message = "join_request_approved";
+							Player createdPlayer = createPlayer(cp.player.getName());
+							joinResponse.message = "join_request_approved";
+							joinResponse.clientPlayer = createdPlayer;
 							connection.sendTCP(joinResponse);
 							Log.debug("[SERVER] A player joined the server: " + cp.player.getName());
 						}else if( cp.message.equals("client_player_update")){
-							PlayerCharacter player = cp.player;
+							Player player = cp.player;
 							updatePlayer(player);
 						}
 					}
@@ -120,9 +112,9 @@ public class ServerEngine implements Runnable, Serializable{
 		while(true){	
 			if( !players.isEmpty()){
 				Log.trace("[SERVER][RUN] Updating players...");
-				Iterator<PlayerCharacter> it = players.iterator();
+				Iterator<Player> it = players.iterator();
 				while(it.hasNext()){
-					PlayerCharacter player = it.next();
+					Player player = it.next();
 					Log.trace(":---[SERVER][RUN] Before update: " + player.getName() + ", " + player.getX() + ", " + player.getY() + ", " + player.getDx() + ", " + player.getDy());
 					player.update();
 					Log.trace(":------[SERVER][RUN] Updating " + player.getName());
@@ -140,28 +132,27 @@ public class ServerEngine implements Runnable, Serializable{
 		}
 	}
 
-	public synchronized void updatePlayer(PlayerCharacter player){
+	public synchronized void updatePlayer(Player player){
 		Log.debug("[SERVER][CLIENTUPDATE] Server received a client player to update...");
 		Log.debug("[SERVER][CLIENTUPDATE]  " + player.getName() + "," + player.getX() + "," + player.getY() + "," + player.getDx() + "," + player.getDy());
-		Iterator<PlayerCharacter> it = players.iterator();
+		Iterator<Player> it = players.iterator();
 		while(it.hasNext()){
-			PlayerCharacter p = it.next();
+			Player p = it.next();
 			if(p.equals(player)){
 				Log.debug("[SERVER][CLIENTUPDATE] Player: " + p.getName() + " was replaced with " + player.getName());
 				p = player;
 			}
 		}
-
 	}
 
-	public synchronized PlayerCharacter createPlayer(String playerName){
-		PlayerCharacter player = new PlayerCharacter(0, 350, 420, PLAYER_WIDTH, PLAYER_HEIGHT, playerName, PLAYER_LIFE, true, 1, PLAYER_MONEY, PLAYER_INVENTORY_SIZE, PLAYER_MAXHEALTH);	
+	public synchronized Player createPlayer(String playerName){
+		Player player = new Player(playerName, PLAYER_WIDTH, PLAYER_HEIGHT);	
 		players.add(player);
 		Log.debug("[SERVER][CREATEPLAYER] " + playerName + " created");
 		Log.debug("[SERVER][CREATEPLAYER] Players on the server: " + players.size());
-		Iterator<PlayerCharacter> it = players.iterator();
+		Iterator<Player> it = players.iterator();
 		while(it.hasNext()){
-			PlayerCharacter p = it.next();
+			Player p = it.next();
 			Log.debug(":---[SERVER] " + p.getName());
 		}
 		return player;
@@ -171,10 +162,10 @@ public class ServerEngine implements Runnable, Serializable{
 		if( !server.getConnections().equals(null)){
 			Log.debug("[SERVER][UPDATECLIENTS] Sending server state to all clients...");
 			ServerPacket sendPacket = new ServerPacket();
-			ServerPacket.message = "update";
-			ServerPacket.players = players;
-			ServerPacket.world = world;
-			Log.debug("[SERVER][UPDATECLIENTS] sendPacket contains:  MSG = " + ServerPacket.message + ", Players = " + ServerPacket.players + ", World = " + world.getID());
+			sendPacket.message = "update";
+			sendPacket.players = players;
+			sendPacket.world = world.getCurrentMap();
+			Log.debug("[SERVER][UPDATECLIENTS] sendPacket contains:  MSG = " + sendPacket.message + ", Players = " + sendPacket.players + ", World = " + world.getID());
 			server.sendToAllTCP(sendPacket);
 
 		}else{
@@ -218,7 +209,7 @@ public class ServerEngine implements Runnable, Serializable{
 	 * Returns a List of characters, thats currently in the map
 	 * @return characters List of Characters
 	 */
-	public ArrayList<PlayerCharacter> getPlayers(){
+	public ArrayList<Player> getPlayers(){
 		return players;
 	}
 }

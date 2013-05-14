@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 import World.Tile;
 
-import Character.PlayerCharacter;
+import Character.Player;
 import Controller.KeyboardController;
 import Engine.GameClient;
 import Engine.ServerEngine;
@@ -85,13 +85,14 @@ public class GamePanel extends JPanel{
 	
 	private void paintPlayers(Graphics2D g2d){
 		g2d.setColor(Color.BLACK);
-		ArrayList<PlayerCharacter> players = gameClient.getPlayers();
+		ArrayList<Player> players = gameClient.getPlayers();
 		
-		Iterator<PlayerCharacter> it = players.iterator();
+		Iterator<Player> it = players.iterator();
 		while(it.hasNext()){
-			PlayerCharacter player = it.next();
+			Player player = it.next();
 			// get current image
-			Image img = playerImages.getImage(player.getDirection(), (player.getDx() != 0 || player.getDy() != 0), player.isAttacking());
+			Image img = playerImages.getImage(player.getDirection(), (player.getDx() != 0 || player.getDy() != 0), false);
+			//Image img = playerImages.getImage(player.getDirection(), (player.getDx() != 0 || player.getDy() != 0), player.isAttacking());
 			
 			// calc where to draw image
 			int x = player.getX() - (img.getWidth(this)/4) - 2;
@@ -106,11 +107,15 @@ public class GamePanel extends JPanel{
 	 * @param g2d The graphics
 	 */
 	private void paintClientPlayer(Graphics2D g2d){
-		PlayerCharacter player = gameClient.getClientPlayer();
+		Player player = gameClient.getClientPlayer();
 		g2d.setColor(Color.BLACK);
 		
 		// get current image
-		Image img = playerImages.getImage(player.getDirection(), (player.getDx() != 0 || player.getDy() != 0), player.isAttacking());
+		Image img = playerImages.getImage(player.getDirection(), (player.getDx() != 0 || player.getDy() != 0), false);
+		
+		
+		//ändrade isAttacking till false, finns ingen sån metod!
+		//Image img = playerImages.getImage(player.getDirection(), (player.getDx() != 0 || player.getDy() != 0), player.isAttacking());
 		
 		// calc where to draw image
 		int x = player.getX() - (img.getWidth(this)/4) - 2;

@@ -2,33 +2,32 @@ package Engine;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import com.esotericsoftware.kryo.*;
 import com.esotericsoftware.kryonet.*;
 import com.esotericsoftware.minlog.Log;
 
+import Networking.ClientPacket;
 //import Networking.ClientPacket;
 //import Networking.ServerPacket;
 import Networking.Network;
-import Networking.Network.ClientPacket;
-import Networking.Network.ServerPacket;
+import Networking.ServerPacket;
 
+import World.Map;
 import World.World;
-import Character.PlayerCharacter;
+import Character.Player;
 
 public class GameClient implements Runnable{
 	private Client client;
-	private ArrayList<PlayerCharacter> players;
-	private PlayerCharacter player;
+	private ArrayList<Player> players;
+	private Player player;
 	private World world;
 
 	public GameClient(String playerName, String localAddress){
 		System.setProperty("java.net.preferIPv4Stack" , "true");
 		
-		players = new ArrayList<PlayerCharacter>();
+		players = new ArrayList<Player>();
 		world = new World(1);
-		player = new PlayerCharacter(0, 0, 0, 0, 0, "RICHARD", 0, false, 0, 0, 0, 0); // Creates a dummy player, just for the join_request and to fool the GamePanel
+		player = new Player("RICHARD", 32, 32); // Creates a dummy player, just for the join_request and to fool the GamePanel
 		
 		initClient(localAddress);
 		client.start();
@@ -65,18 +64,18 @@ public class GameClient implements Runnable{
 				}//----------UPDATE CLIENT PLAYER LIST--------------------
 				if (object instanceof ServerPacket){
 					ServerPacket receivedPacket = (ServerPacket)object;
-					Log.debug("[CLIENT] Client received a ServerPacket: " + ServerPacket.message);
+					Log.debug("[CLIENT] Client received a ServerPacket: " + receivedPacket.message);
 					// Receive a new player upon start
-					if(ServerPacket.message.equals("join_request_approved")){
-						player = ServerPacket.clientPlayer;
+					if(receivedPacket.message.equals("join_request_approved")){
+						player = receivedPacket.clientPlayer;
 						Log.debug("[CLIENT] Join request approved by server");
 					}
 					// Receive updated player list
-					if(ServerPacket.message.equals("update")){
+					if(receivedPacket.message.equals("update")){
 						Log.debug("[CLIENT] Update packet received");
-						player = ServerPacket.clientPlayer;
-						players = ServerPacket.players;
-						world = ServerPacket.world;
+						player = receivedPacket.clientPlayer;
+						players = receivedPacket.players;
+						world.setCurrentMap(receivedPacket.world);
 						
 						
 						/*Iterator<PlayerCharacter> it = players.iterator();
@@ -106,8 +105,8 @@ public class GameClient implements Runnable{
 		try {Thread.sleep(3000);} catch (InterruptedException e) {e.printStackTrace();}
 		System.out.println("[CLIENT] RTT to Server: " + client.getReturnTripTime() + " ms.");
 		ClientPacket joinRequest = new ClientPacket();
-		ClientPacket.message = "join_request";
-		ClientPacket.player = player;
+		joinRequest.message = "join_request";
+		joinRequest.player = player;
 		
 		
 		client.sendTCP(joinRequest);
@@ -117,8 +116,8 @@ public class GameClient implements Runnable{
 		Log.debug(":---[CLIENT] Updating Server");
 		Log.debug(":------[CLIENT] " + player.getName() + ", " + player.getX() + ", " + player.getY() + ", " + player.getDx() + ", " + player.getDy());
 		ClientPacket sendPacket = new ClientPacket();
-		ClientPacket.message = "client_player_update";
-		ClientPacket.player = player;
+		sendPacket.message = "client_player_update";
+		sendPacket.player = player;
 		client.sendTCP(sendPacket);
 		Log.debug(":---[CLIENT] Client Update sent. ");
 	}
@@ -140,11 +139,11 @@ public class GameClient implements Runnable{
 		this.world = world;
 	}
 
-	public ArrayList<PlayerCharacter> getPlayers(){
+	public ArrayList<Player> getPlayers(){
 		return players;
 	}
 
-	public PlayerCharacter getClientPlayer(){
+	public Player getClientPlayer(){
 		return player;
 	}
 }

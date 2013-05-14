@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.File;
 import java.io.Serializable;
 
-import Character.Character;
+import Character.Player;
 
 /**
  * This class contains information about all the tiles and
@@ -26,7 +26,7 @@ public class Map implements Serializable{
 	private ArrayList<Tile> backTiles;
 	private ArrayList<Tile> blockTiles;
 	private ArrayList<Tile> doorTiles;
-	private ArrayList<Character> characters;
+	private ArrayList<Player> characters;
 	
 	
 	//Skapa en statisk klass för dessa!
@@ -105,7 +105,7 @@ public class Map implements Serializable{
 	 * Returns a List of all characters
 	 * @return characters A list of all the charactesr
 	 */
-	public ArrayList<Character> getCharacters()
+	public ArrayList<Player> getCharacters()
 	{
 		return characters;		
 	}
@@ -114,7 +114,7 @@ public class Map implements Serializable{
 	 * Sets new characters
 	 * @param characters A list of all the new charactesr
 	 */
-	public void setCharacters(ArrayList<Character> characters)
+	public void setCharacters(ArrayList<Player> characters)
 	{
 		this.characters = characters;		
 	}

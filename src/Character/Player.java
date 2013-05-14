@@ -4,15 +4,21 @@ import Utility.Entity;
 
 public class Player extends Entity {
 
+	private static final long serialVersionUID = 8L;
 	private String name;
 	private String direction;
-	private int health;
 	private int dx;
 	private int dy;
+	
+	public Player()
+	{
+		super();
+		;
+	}
 
-	public Player(String name, int health){
-		super(id, x, y, width, height);  
-		this.health = health;
+	public Player(String name, int width, int height)
+	{
+		super(0, 50, 50, width, height);  
 		direction = "right";
 		dx = dy = 0;
 
@@ -46,22 +52,7 @@ public class Player extends Entity {
         move();
     }
     
-    /**
-	 * Returns the max health this player can have.
-	 * @return The max capacity for player's health.
-	 */
-	public int getMaxHealth(){
-		return maxHealth;
-	}
-	     
-	/**
-	 * Sets a new value for maxHealth.
-	 * @param maxHealth The new value for max capacity health.
-	 */
-	public void setMaxHealth(int maxHealth){
-		this.maxHealth = maxHealth;
-	}
-	
+ 
 	   /**
 	    * Returns the latest direction of this character.
 	    * @return direction The current direction this Character is facing.
@@ -127,32 +118,14 @@ public class Player extends Entity {
 			   return(true);
 		   }*/
 		   
-		   if( this.getName() == ((Character)obj).getName()){
+		   if( this.getName() == ((Player)obj).getName()){
 			   return true;
 		   }
 		   
 		   return(false);
 	   }
 	   
-	   /**
-	    * Returns the health of this Character.
-	    * @return The current health of this Character.
-	    */
-	   public int getHealth()
-	   {
-	       return health;
-	   }
 	   
-	   /**
-	    * Sets a new value for health.
-	    * @param health The new value for health.
-	    */
-	   public void setHealth(int health)
-	   {
-		   this.health = health;
-		   setChanged();
-		   notifyObservers("information");
-	   }  
 	   
 	   /**
 	    * Returns the name of this Character.

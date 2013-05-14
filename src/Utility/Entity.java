@@ -37,6 +37,11 @@ public abstract class Entity extends Observable implements Serializable{
 		this.height = height;
 	}
 	
+	public Entity()
+	{
+		;
+	}
+	
 	/**
 	 * Returns the id of this entity
 	 * @return id The id of the entity

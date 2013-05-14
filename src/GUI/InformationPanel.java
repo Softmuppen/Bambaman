@@ -11,7 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import Character.PlayerCharacter;
+import Character.Player;
 
 /**
  * One of the panels that is displayed constantly by the GameView class. It provides
@@ -56,7 +56,7 @@ public class InformationPanel extends JPanel implements Observer{
 	 * Handles the updating process
 	 * @param player The player character
 	 */
-	private void updateInformation(PlayerCharacter player){
+	private void updateInformation(Player player){
 		removeAll();
 		
 		// create the lifeContainer
@@ -67,8 +67,9 @@ public class InformationPanel extends JPanel implements Observer{
 		add(life);
 		
 		// calculate lifebar
-		int lifeBar = Math.round( LIFEBAR_MAX * ((float)(player.getHealth())/ 100) );		// float lifeBar = LIFEBAR_MAX * (float)(player.getHealth()/ player.getMaxHealth());
-	
+		int lifeBar = Math.round( LIFEBAR_MAX * ((float)(100)/ 100) );		// float lifeBar = LIFEBAR_MAX * (float)(player.getHealth()/ player.getMaxHealth());
+		//int lifeBar = Math.round( LIFEBAR_MAX * ((float)(player.getHealth())/ 100) );		
+		
 		// create the red lifebar
 		JPanel lifeContainer = new JPanel();
 		lifeContainer.setPreferredSize(new Dimension(lifeBar, 12));
@@ -82,10 +83,11 @@ public class InformationPanel extends JPanel implements Observer{
 		money.setOpaque(false);
 		add(money);
 		
+		/*
 		JLabel moneyLabel = new JLabel(player.getMoney()+"");
 		moneyLabel.setForeground(Color.WHITE);
 		money.add(moneyLabel);
-		
+		*/
 		
 		revalidate();
 	}
@@ -94,7 +96,7 @@ public class InformationPanel extends JPanel implements Observer{
 	 * Reset the information when game loads etc...
 	 * @param player The player character
 	 */
-	public void reset(PlayerCharacter player){
+	public void reset(Player player){
 		updateInformation(player);
 	}
 	
@@ -103,9 +105,9 @@ public class InformationPanel extends JPanel implements Observer{
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		if(o instanceof PlayerCharacter && arg instanceof String){	
+		if(o instanceof Player && arg instanceof String){	
 			if(arg.equals("information")){
-				updateInformation( (PlayerCharacter) o);
+				updateInformation( (Player) o);
 			}
 		}	
 	}

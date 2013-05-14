@@ -10,7 +10,6 @@ import GUI.StartScreen;
 import Networking.Network;
 
 import com.esotericsoftware.kryonet.*;
-import com.esotericsoftware.kryo.*;
 import com.esotericsoftware.minlog.Log;
 
 /**

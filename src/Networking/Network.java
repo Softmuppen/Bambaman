@@ -1,9 +1,8 @@
 package Networking;
 
-import java.util.ArrayList;
+import java.awt.Color;
 
-import Character.*;
-import Character.Character;
+import Character.Player;
 import Item.ArmorItem;
 import Item.Item;
 import Item.LifeItem;
@@ -16,7 +15,6 @@ import World.*;
 import com.esotericsoftware.kryo.Kryo;
 
 import com.esotericsoftware.kryonet.EndPoint;
-import javax.swing.*;
 
 public class Network {
 
@@ -39,12 +37,7 @@ public class Network {
 		
 		kryo.register(Entity.class);
 		
-		kryo.register(AttributeCharacter.class);
-		kryo.register(Character.class);
-		kryo.register(EnemyCharacter.class);
-		kryo.register(Interactable.class);
-		kryo.register(PlayerCharacter.class);
-		kryo.register(ShopCharacter.class);
+		kryo.register(Player.class);
 		
 		kryo.register(ArmorItem.class);
 		kryo.register(Item.class);
@@ -68,18 +61,5 @@ public class Network {
 		
 		
 		*/
-	}
-	
-	static public class ClientPacket {
-		public static String message;
-		public static PlayerCharacter player;
-		//public String value;
-	}
-	
-	static public class ServerPacket {
-		public static String message;
-		public static World world;
-		public static ArrayList<PlayerCharacter> players;
-		public static PlayerCharacter clientPlayer;
 	}
 }
