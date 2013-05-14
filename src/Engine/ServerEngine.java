@@ -86,6 +86,7 @@ public class ServerEngine implements Runnable, Serializable{
 							Player createdPlayer = createPlayer(cp.player.getName());
 							joinResponse.message = "join_request_approved";
 							joinResponse.clientPlayer = createdPlayer;
+							Log.debug("OMGOMGOMG" + createdPlayer.getName());
 							connection.sendTCP(joinResponse);
 							Log.debug("[SERVER] A player joined the server: " + cp.player.getName());
 						}else if( cp.message.equals("client_player_update")){
