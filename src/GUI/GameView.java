@@ -150,7 +150,7 @@ public class GameView extends JFrame implements Observer, Runnable{
 		
 		// add observer to player
 		
-		Log.debug(gameClient.getClientPlayer().getName());
+		Log.debug("[GAMEVIEW][ADDOBSERVERS] " + gameClient.getClientPlayer().getName());
 		gameClient.getClientPlayer().addObserver(this);
 		gameClient.getClientPlayer().addObserver(informationPanel);
 		

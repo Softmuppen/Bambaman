@@ -23,7 +23,6 @@ public class Player extends Entity {
 		health = 100;
 		direction = "right";
 		dx = dy = 0;
-
 	}
 
 	public void setHealth(int health){
