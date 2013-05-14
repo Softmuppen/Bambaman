@@ -20,7 +20,7 @@ public class Network {
 
 
 
-	// This class is a convenient place to keep things common to both the client and server.
+	// This class is a convenient place to keep things common to both the client and server..
 	static public final int tcpport = 55551;
 	static public final int udpport = 55552;
 
